@@ -74,5 +74,5 @@ void	ft_checker(char *line)
 	}
 	printf("\n");
 	if (g_envp.valid_input == false)
-		printf("FOUND ERROR @ %c\n", line[i]);
+		printf("FOUND ERROR PARSING\n");
 }
