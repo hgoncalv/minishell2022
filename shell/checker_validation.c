@@ -2,7 +2,6 @@
 
 void	ft_validate_pipe(char *line, int i)
 {
-	//NEED TO IMPLEMENT BETTER
 	if (i == 0)
 		g_envp.valid_input = false;
 	if (line[i + 1] && (line[i + 1] == '|' || line[i + 1] == '>'  || line[i + 1] == '<' ))
@@ -27,8 +26,7 @@ void	ft_validate_redir_output(char *line, int i) //>
 	}
 	else
 		g_envp.valid_input = false;
-	if (g_envp.valid_input == false)
-		printf("FOUND ERROR @ %c\n", line[i]);
+
 }
 
 void	ft_validate_redir_input(char *line, int i) //<
@@ -47,26 +45,34 @@ void	ft_validate_redir_input(char *line, int i) //<
 	}
 	else
 		g_envp.valid_input = false;
-	if (g_envp.valid_input == false)
-		printf("FOUND ERROR @ %c\n", line[i]);
-
 }
 
 void	ft_checker(char *line)
 {
-	int i = 0;
+	int 	i;
+	char	c;
 
+	i = 0;
 	while(line[i])
 	{
-		//if quotes jump to next quote
+		if (line[i] == '\"' || line[i] == '\'')
+		{
+			c = line[i];
+			while (line[i] && line[i] != c)
+				i++;
+			if (line[i] == 0)
+				printf("UNCLOSED QUOTES ERROR\n");
+		}
 		if (line[i] == '|')
 			ft_validate_pipe(line, i);
 		if (line[i] == '>')
 			ft_validate_redir_output(line, i);
 		if (line[i] == '<')
 			ft_validate_redir_input(line, i);
-		printf("%c-", line[i]);
+		// printf("%c-", line[i]);
 		i++;
 	}
 	printf("\n");
+	if (g_envp.valid_input == false)
+		printf("FOUND ERROR @ %c\n", line[i]);
 }
