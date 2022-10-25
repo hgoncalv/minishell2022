@@ -33,6 +33,7 @@ char	***ft_get_cmds(char **line, char ***pipes)
 	return (cmd);
 }
 
+
 void	ft_loop_confirmed(char ****cmd, char ***pipes, int *status, char **line)
 {
 	*cmd = ft_get_cmds(line, pipes);
@@ -54,11 +55,13 @@ int	ft_loop(void)
 	status = 0;
 	while (g_envp.to_exit == 0)
 	{
+		g_envp.valid_input = true;
 		signal(SIGINT, ft_handler);
 		signal(SIGQUIT, SIG_IGN);
 		line = ft_get_line_n_set_shell_prompt();
 		if (line == NULL)
 			break ;
+		ft_checker(line);
 		if (ft_check_argv(line))
 			ft_loop_confirmed(&cmd, &pipes, &status, &line);
 		else
@@ -77,6 +80,7 @@ int	main(int argc, char **argv, char **envp)
 	g_envp.envp = shell_envp;
 	g_envp.to_exit = 0;
 	g_envp.exit_str = NULL;
+	g_envp.valid_input = true;
 	ft_set_env_cmd_return(0);
 	(void)argc;
 	(void)argv;

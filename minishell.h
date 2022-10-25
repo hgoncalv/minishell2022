@@ -22,6 +22,7 @@
 # define FT_TOK_DELIM " \t\r\n\a"
 # define FT_RL_BUFSIZE 1024
 
+# include <stdbool.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <limits.h>
@@ -49,6 +50,7 @@ typedef struct s_envp
 	int			to_exit;
 	char		*exit_str;
 	int			test_int;
+	bool		valid_input;
 }				t_envp;
 
 typedef struct s_builtin
@@ -87,6 +89,9 @@ typedef struct s_vars
 }				t_vars;
 
 extern t_envp	g_envp;
+
+//validation
+void	ft_checker(char *line);
 
 //Initialize Structs
 void			ft_inicialize_vars(t_vars *vars);
