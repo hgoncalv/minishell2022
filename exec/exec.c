@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:34 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/24 00:45:41 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 20:01:43 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	ft_execute(char **cmd)
 	char		**argv;
 	t_vars		vars;
 	t_builtin	builtins;
+	char		*tmp_line;
 
+	tmp_line = ft_concat_multi(cmd, NULL);
+	ft_checker(tmp_line);
+	free(tmp_line);
 	ft_inicialize_builtins(&builtins);
 	ft_inicialize_vars(&vars);
 	ret = -666;
