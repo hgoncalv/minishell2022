@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:34 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/25 21:16:47 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:43:10 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,15 @@ int	ft_execute(char **cmd)
 	char		**argv;
 	t_vars		vars;
 	t_builtin	builtins;
-	char		*tmp_line;
 
-	tmp_line = ft_concat_multi(cmd, NULL);
-	if (!ft_checker(tmp_line))
-	{
-		free(tmp_line);
-		return (-1);
-	}
-	free(tmp_line);
 	ft_inicialize_builtins(&builtins);
 	ft_inicialize_vars(&vars);
 	ret = -666;
 	if (cmd[0] == NULL)
 		return (1);
-	argv = ft_tokenized_str2_matrix_remove_nps(cmd);
+	argv = ft_check_export_return_argv(cmd);
+	if (!argv)
+		argv = ft_tokenized_str2_matrix_remove_nps(cmd);
 	ret = ft_execute_if_builtin_run(argv, 0);
 	if (ret != 666)
 		return (ret);
@@ -40,8 +34,10 @@ int	ft_execute(char **cmd)
 	ft_matrix_free(argv);
 	return (ret);
 }
+
 void	ft_launch_pid0(int *ret, char ***argv, char **path)
 {
+	ft_check_set_output2file(*argv, 1);
 	*ret = ft_execute_if_builtin_run(*argv, 1);
 	if (*ret != 666)
 		exit(*ret);

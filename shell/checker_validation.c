@@ -4,7 +4,8 @@ void	ft_validate_pipe(char *line, int i)
 {
 	if (i == 0)
 		g_envp.valid_input = false;
-	if (line[i + 1] && (line[i + 1] == '|' || line[i + 1] == '>'  || line[i + 1] == '<' ))
+	if (line[i + 1] && (line[i + 1] == '|' || line[i + 1] == '>' || line[i
+			+ 1] == '<'))
 	{
 		g_envp.valid_input = false;
 	}
@@ -18,15 +19,15 @@ void	ft_validate_redir_output(char *line, int i) //>
 	{
 		if ((line[i + 1] == '>'))
 		{
-			if ((line[i + 2] && (line[i + 2] == '<' || line[i + 2] == '>' || line[i + 2] == '|' )))
+			if ((line[i + 2] && (line[i + 2] == '<' || line[i + 2] == '>'
+						|| line[i + 2] == '|')))
 				g_envp.valid_input = false;
 		}
-		else if (line[i + 1] == '<' )
-				g_envp.valid_input = false;
+		else if (line[i + 1] == '<')
+			g_envp.valid_input = false;
 	}
 	else
 		g_envp.valid_input = false;
-
 }
 
 void	ft_validate_redir_input(char *line, int i) //<
@@ -41,19 +42,19 @@ void	ft_validate_redir_input(char *line, int i) //<
 				g_envp.valid_input = false;
 		}
 		else if ((line[i + 1] == '>'))
-				g_envp.valid_input = false;
+			g_envp.valid_input = false;
 	}
 	else
 		g_envp.valid_input = false;
 }
 
-bool		ft_checker(char *line)
+bool	ft_checker(char *line)
 {
-	int 	i;
+	int		i;
 	char	c;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == '\"' || line[i] == '\'')
 		{

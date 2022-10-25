@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:22:06 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/22 12:37:12 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:59:07 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ char	**ft_tokenized_str2_matrix_remove_nps(char **cmd)
 		(vars.j)++;
 	}
 	argv[vars.j] = NULL;
+	argv = ft_args_matrix(cmd, argv);
 	return (argv);
 }

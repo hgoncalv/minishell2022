@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:19 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/25 21:17:03 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:15:22 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,18 @@ char	***ft_get_cmds(char **line, char ***pipes)
 void	ft_loop_confirmed(char ****cmd, char ***pipes, int *status, char **line)
 {
 	*cmd = ft_get_cmds(line, pipes);
-	if ((*pipes)[0] && (*pipes)[1] == NULL)
-		*status = ft_execute((*cmd)[0]);
-	else if (*pipes[0])
-		*status = ft_setup_pipes(*cmd);
+	if (check_cmds_for_redir_errors(*cmd))
+	{
+		if ((*pipes)[0] && (*pipes)[1] == NULL)
+			*status = ft_execute((*cmd)[0]);
+		else if (*pipes[0])
+			*status = ft_setup_pipes(*cmd);
+	}
+	else
+	{
+		printf("minishell: parse error near `\\n`\n");
+		*status = 1;
+	}
 	ft_set_env_cmd_return(*status);
 	ft_free_loop(*cmd, *pipes, *line);
 }
@@ -60,11 +68,6 @@ int	ft_loop(void)
 		line = ft_get_line_n_set_shell_prompt();
 		if (line == NULL)
 			break ;
-		// if (!ft_checker(line))
-		// {
-		// 	free(line);
-		// 	continue ;
-		// }
 		if (ft_check_argv(line))
 			ft_loop_confirmed(&cmd, &pipes, &status, &line);
 		else
@@ -88,6 +91,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	status = ft_loop();
+	printf("exit");
 	if (g_envp.exit_str == NULL)
 	{
 		ft_matrix_free(g_envp.envp);

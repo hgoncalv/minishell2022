@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 16:49:11 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/23 21:28:24 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:14:37 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # define FT_TOK_DELIM " \t\r\n\a"
 # define FT_RL_BUFSIZE 1024
 
-# include <stdbool.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/ioctl.h>
@@ -91,7 +91,7 @@ typedef struct s_vars
 extern t_envp	g_envp;
 
 //validation
-bool	ft_checker(char *line);
+bool			ft_checker(char *line);
 
 //Initialize Structs
 void			ft_inicialize_vars(t_vars *vars);
@@ -120,10 +120,11 @@ char			**ft_get_token(char *token, char **tokens, char *delimiters,
 t_values		ft_helper_quote(t_values v, char *line);
 t_values		ft_helper_count(t_values v, char *line);
 t_values		ft_if_quote_z(char *line, t_values value);
+int				check_cmds_for_redir_errors(char ***cmd);
 
 //Variable Expansion
-char			**ft_var_expansion_allocate_matrix_n_start_ints(char *str,
-					t_vars *vars);
+char	**ft_var_expansion_allocate_matrix_n_start_ints(char *str,
+														t_vars *vars);
 void			ft_var_exp_case1(char *str, t_vars *vars);
 void			ft_var_exp_case2(char *str, t_vars *vars);
 char			*ft_var_expansion(char *str);
@@ -172,8 +173,8 @@ int				ft_cd(char **argv);
 int				ft_pwd(char **argv);
 int				ft_exit(char **argv);
 int				ft_help(char **argv);
-int				ft_set_cd_folder_return_if_free_folder_or_not(char **argv,
-					char **ptr2folder);
+int	ft_set_cd_folder_return_if_free_folder_or_not(char **argv,
+													char **ptr2folder);
 int				ft_cat(char **argv);
 int				ft_heredoc(char **argv);
 
@@ -191,8 +192,8 @@ int				ft_child_proces(int *fd_in, int *p, char ***cmd);
 int				ft_setup_pipes(char ***cmd);
 int				ft_exec_pipe(char ***cmd, int end);
 char			**ft_check_export_return_argv(char **cmd);
-void			ft_check_if_back_redir_fill_matrix(t_vars *vars,
-					char *chars2replace);
+void	ft_check_if_back_redir_fill_matrix(t_vars *vars,
+										char *chars2replace);
 int				ft_check_if_back_redirection(char **argv);
 int				ft_check_set_output2file(char **argv, int piped);
 int				ft_execute_if_builtin_run(char **argv, int is_piped);
