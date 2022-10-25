@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:19 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/24 00:55:37 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/25 21:17:03 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	***ft_get_cmds(char **line, char ***pipes)
 	cmd = ft_parse_cmds(*pipes);
 	return (cmd);
 }
-
 
 void	ft_loop_confirmed(char ****cmd, char ***pipes, int *status, char **line)
 {
@@ -61,11 +60,11 @@ int	ft_loop(void)
 		line = ft_get_line_n_set_shell_prompt();
 		if (line == NULL)
 			break ;
-		if (!ft_checker(line))
-		{
-			free(line);
-			continue ;
-		}
+		// if (!ft_checker(line))
+		// {
+		// 	free(line);
+		// 	continue ;
+		// }
 		if (ft_check_argv(line))
 			ft_loop_confirmed(&cmd, &pipes, &status, &line);
 		else
@@ -97,7 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	else
 	{
 		printf("minishell: exit: %s: numeric argument required\n",
-			g_envp.exit_str);
+				g_envp.exit_str);
 		return (2);
 	}
 	return (status);
