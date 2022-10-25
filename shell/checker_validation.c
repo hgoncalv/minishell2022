@@ -47,7 +47,7 @@ void	ft_validate_redir_input(char *line, int i) //<
 		g_envp.valid_input = false;
 }
 
-void	ft_checker(char *line)
+bool		ft_checker(char *line)
 {
 	int 	i;
 	char	c;
@@ -60,8 +60,6 @@ void	ft_checker(char *line)
 			c = line[i];
 			while (line[i] && line[i] != c)
 				i++;
-			if (line[i] == 0)
-				printf("UNCLOSED QUOTES ERROR\n");
 		}
 		if (line[i] == '|')
 			ft_validate_pipe(line, i);
@@ -74,5 +72,6 @@ void	ft_checker(char *line)
 	}
 	printf("\n");
 	if (g_envp.valid_input == false)
-		printf("FOUND ERROR PARSING\n");
+		printf("INVALID USER INPUT... ERROR IN PARSING\n");
+	return (g_envp.valid_input);
 }

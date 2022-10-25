@@ -91,7 +91,7 @@ typedef struct s_vars
 extern t_envp	g_envp;
 
 //validation
-void	ft_checker(char *line);
+bool	ft_checker(char *line);
 
 //Initialize Structs
 void			ft_inicialize_vars(t_vars *vars);

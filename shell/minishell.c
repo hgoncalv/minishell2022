@@ -61,7 +61,11 @@ int	ft_loop(void)
 		line = ft_get_line_n_set_shell_prompt();
 		if (line == NULL)
 			break ;
-		ft_checker(line);
+		if (!ft_checker(line))
+		{
+			free(line);
+			continue ;
+		}
 		if (ft_check_argv(line))
 			ft_loop_confirmed(&cmd, &pipes, &status, &line);
 		else
