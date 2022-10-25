@@ -21,7 +21,7 @@ void	ft_validate_redir_output(char *line, int i) //>
 			if ((line[i + 2] && (line[i + 2] == '<' || line[i + 2] == '>' || line[i + 2] == '|' )))
 				g_envp.valid_input = false;
 		}
-		else if ((line[i + 1] == '<')
+		else if (line[i + 1] == '<' )
 				g_envp.valid_input = false;
 	}
 	else
