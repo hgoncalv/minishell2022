@@ -16,6 +16,16 @@ static void	ft_do_quote(char **output, char c)
 		ft_do_quote(output, c);
 }
 
+static char *buffer_quotes(char **buff, char c, char *str, int i)
+{
+	str[(i)++] = *(*buff)++;
+	while (**buff && **buff != c)
+		str[(i)++] = *(*buff)++;
+	if (**buff == c)
+		str[(i)++] = *(*buff)++;
+	return (str);
+}
+
 static char *buffer_scan_for_quotes(char *str)
 {
 	int i;
@@ -93,14 +103,26 @@ char **the_matrix(char *line)
 		if (!line || ft_strlen(line) == 0)
 			break;
 		matrix[i++] = ft_strdup(buffer_to_string(&line));
-		// matrix[i++] = _string().dup(buffer_to_string(&str));
-		// matrix[i++] = parse_clean(tmp_str); //EXTRA
-		// free(tmp_str);
 	}
 	matrix[i] = 0;
 	return (matrix);
-};
+}
 
+
+//DEBUG
+void	free_arrays(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		arr[i++] = NULL;
+	}
+	free(arr);
+	arr = NULL;
+}
 
 void print_arrays(char **a)
 {

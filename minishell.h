@@ -91,8 +91,9 @@ typedef struct s_vars
 extern t_envp	g_envp;
 
 //PARSE NEW
-char **the_matrix(char *line);
-void print_arrays(char **a);
+char 	**the_matrix(char *line);
+void	free_arrays(char **arr);
+void 	print_arrays(char **a);
 //Parsing Utils
 int r_size(char *s);
 int ft_strcount_char(char *str, char l);
