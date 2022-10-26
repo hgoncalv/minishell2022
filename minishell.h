@@ -90,6 +90,17 @@ typedef struct s_vars
 
 extern t_envp	g_envp;
 
+//PARSE NEW
+char **the_matrix(char *line);
+void print_arrays(char **a);
+//Parsing Utils
+int r_size(char *s);
+int ft_strcount_char(char *str, char l);
+int is_whitespace(int c);
+int is_special_parse(int c);
+void ft_stradd(char **str, char *add);
+
+
 //validation
 bool			ft_checker(char *line);
 
