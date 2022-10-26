@@ -101,3 +101,48 @@ int			main(int ac, char **ag, char **env)
 	}
 	return (0);
 }
+
+
+
+/* NOTES
+void _file_close(int fd[2])
+{
+	dup2(fd[1], 1);
+	close(fd[0]);
+	close(fd[1]);
+}
+
+// O_MODE == O_TRUNC: truncate the file to 0 bytes
+// O_MODE == O_APPEND: append to the end of the file
+
+int _file_create(int fd[2], char *path, int mode)
+{
+	fd[0] = open(path, O_CREAT | O_WRONLY | mode, 0644);
+	if (fd[0] > 0)
+	{
+		fd[1] = dup(1);
+		dup2(fd[0], 1);
+	}
+	else
+		printf("Minishell: %s: Permission denied\n", path);
+	return (!(fd[0] > 2));
+}
+
+struct s_file
+{
+	int (*create)(int fd[2], char *path, int mode);
+	void (*close)(int fd[2]);
+};
+
+t_file _file(void)
+{
+	static t_file file = {
+		_file_create,
+		_file_close};
+
+	return (file);
+}
+
+
+
+*/
