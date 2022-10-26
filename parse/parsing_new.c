@@ -16,7 +16,7 @@ static void	ft_do_quote(char **output, char c)
 		ft_do_quote(output, c);
 }
 
-static char *buffer_quotes(char **buff, char c, char *str, int i)
+static char	*buffer_quotes(char **buff, char c, char *str, int i)
 {
 	str[(i)++] = *(*buff)++;
 	while (**buff && **buff != c)
@@ -26,12 +26,12 @@ static char *buffer_quotes(char **buff, char c, char *str, int i)
 	return (str);
 }
 
-static char *buffer_scan_for_quotes(char *str)
+static char	*buffer_scan_for_quotes(char *str)
 {
-	int i;
-	int f;
-	char c;
-	char k;
+	int		i;
+	int		f;
+	char	c;
+	char	k;
 
 	f = 0;
 	k = 0;
@@ -51,11 +51,10 @@ static char *buffer_scan_for_quotes(char *str)
 	return (str);
 }
 
-
-static char *buffer_to_string(char **buff)
+static char	*buffer_to_string(char **buff)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	str = calloc(sizeof(char), (ft_strlen(*buff) + 1));
 	i = 0;
@@ -63,8 +62,9 @@ static char *buffer_to_string(char **buff)
 	{
 		i = ft_strlen(str);
 		if (is_whitespace(**buff))
-			break;
-		if (is_special_parse(**buff)) //_char(). (**buff == '<' || **buff == '>' || **buff == '|')
+			break ;
+		if (is_special_parse(**buff)) //_char(). (**buff == '<' || **buff == '>'
+										//|| **buff == '|')
 		{
 			if (i != 0)
 				return (str);
@@ -86,13 +86,14 @@ static char *buffer_to_string(char **buff)
 	return (buffer_scan_for_quotes(str));
 }
 
-char **the_matrix(char *line)
+char	**the_matrix(char *line)
 {
-	char **matrix;
-	// char *tmp_str;
-	int l;
-	int i;
+	char	**matrix;
+	int		l;
+	int		i;
+	char	*tmp_str;
 
+	// char *tmp_str;
 	i = 0;
 	l = r_size(line);
 	matrix = malloc(sizeof(char *) * (l + 1));
@@ -101,13 +102,15 @@ char **the_matrix(char *line)
 		while (is_whitespace(*line))
 			line++;
 		if (!line || ft_strlen(line) == 0)
-			break;
-		matrix[i++] = ft_strdup(buffer_to_string(&line));
+			break ;
+		tmp_str = buffer_to_string(&line);
+		matrix[i++] = ft_strdup(tmp_str);
+		free(tmp_str);
+		//matrix[i++] = ft_strdup(buffer_to_string(&line));
 	}
 	matrix[i] = 0;
 	return (matrix);
 }
-
 
 //DEBUG
 void	free_arrays(char **arr)
@@ -124,9 +127,9 @@ void	free_arrays(char **arr)
 	arr = NULL;
 }
 
-void print_arrays(char **a)
+void	print_arrays(char **a)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (a[i])

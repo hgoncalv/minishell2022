@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cruz <mda-cruz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:33:26 by mda-cruz          #+#    #+#             */
-/*   Updated: 2022/10/21 11:34:34 by mda-cruz         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:11:21 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_free_loop(char ***cmd, char **pipes, char *line)
 {
 	ft_free_cmd(cmd);
 	free(pipes);
+	//void(pipes);
 	if (line != NULL)
 		free(line);
 }

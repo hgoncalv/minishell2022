@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:19 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/25 23:15:22 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:13:36 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,55 +76,54 @@ int	ft_loop(void)
 	return (status);
 }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char	**shell_envp;
-// 	int		status;
-
-// 	status = 0;
-// 	shell_envp = ft_matrix_dup(envp, 0);
-// 	g_envp.envp = shell_envp;
-// 	g_envp.to_exit = 0;
-// 	g_envp.exit_str = NULL;
-// 	g_envp.valid_input = true;
-// 	ft_set_env_cmd_return(0);
-// 	(void)argc;
-// 	(void)argv;
-// 	status = ft_loop();
-// 	printf("exit");
-// 	if (g_envp.exit_str == NULL)
-// 	{
-// 		ft_matrix_free(g_envp.envp);
-// 		return (status);
-// 	}
-// 	else
-// 	{
-// 		printf("minishell: exit: %s: numeric argument required\n",
-// 				g_envp.exit_str);
-// 		return (2);
-// 	}
-// 	return (status);
-// }
-
-
-int	main()
+int	main(int argc, char **argv, char **envp)
 {
+	char	**shell_envp;
+	int		status;
 
-	char *line;
-	char **matrix_test;
-	while (1)
+	status = 0;
+	shell_envp = ft_matrix_dup(envp, 0);
+	g_envp.envp = shell_envp;
+	g_envp.to_exit = 0;
+	g_envp.exit_str = NULL;
+	g_envp.valid_input = true;
+	ft_set_env_cmd_return(0);
+	(void)argc;
+	(void)argv;
+	status = ft_loop();
+	printf("exit");
+	if (g_envp.exit_str == NULL)
 	{
-		g_envp.valid_input = true;
-		line = readline("$> ");
-		if (ft_strlen(line) == 0)
-			continue ;
-		else
-			add_history(line);
-		matrix_test = the_matrix(line);
-		validate_the_matrix(matrix_test);
-		print_arrays(matrix_test);
-		free_arrays(matrix_test);
-		free(line);
-		line = NULL;
+		ft_matrix_free(g_envp.envp);
+		return (status);
 	}
+	else
+	{
+		printf("minishell: exit: %s: numeric argument required\n",
+				g_envp.exit_str);
+		return (2);
+	}
+	return (status);
 }
+
+// int	main(void)
+// {
+
+// 	char *line;
+// 	char **matrix_test;
+// 	while (1)
+// 	{
+// 		g_envp.valid_input = true;
+// 		line = readline("$> ");
+// 		if (ft_strlen(line) == 0)
+// 			continue ;
+// 		else
+// 			add_history(line);
+// 		matrix_test = the_matrix(line);
+// 		validate_the_matrix(matrix_test);
+// 		print_arrays(matrix_test);
+// 		free_arrays(matrix_test);
+// 		free(line);
+// 		line = NULL;
+// 	}
+// }

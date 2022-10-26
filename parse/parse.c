@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:06 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/26 17:05:57 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:19:49 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ char	***ft_parse_cmds(char **pipes)
 		v.tmp_str = pipes[v.i];
 		if (v.i > 0)
 			cmd = ft_realloc(cmd, (v.i + 2) * sizeof(char **));
-		cmd[v.i] = ft_split_line2(pipes[v.i], FT_TOK_DELIM);
-		v.tmp_str2 = ft_concat_multi(cmd[v.i], " ");
-		ft_matrix_free(cmd[v.i]);
+		v.matrix = ft_split_line2(pipes[v.i], FT_TOK_DELIM);
+		v.tmp_str2 = ft_concat_multi(v.matrix, " ");
 		cmd[v.i] = the_matrix(v.tmp_str2);
+		ft_matrix_free(v.matrix);
+		free(v.tmp_str2);
 		(v.i)++;
 		v.j = 0;
 	}
