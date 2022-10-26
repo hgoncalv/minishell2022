@@ -94,6 +94,7 @@ extern t_envp	g_envp;
 char 	**the_matrix(char *line);
 void	free_arrays(char **arr);
 void 	print_arrays(char **a);
+bool	validate_the_matrix(char **matrix);
 //Parsing Utils
 int r_size(char *s);
 int ft_strcount_char(char *str, char l);

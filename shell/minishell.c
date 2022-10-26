@@ -114,12 +114,14 @@ int	main()
 	char **matrix_test;
 	while (1)
 	{
+		g_envp.valid_input = true;
 		line = readline("$> ");
 		if (ft_strlen(line) == 0)
 			continue ;
 		else
 			add_history(line);
 		matrix_test = the_matrix(line);
+		validate_the_matrix(matrix_test);
 		print_arrays(matrix_test);
 		free_arrays(matrix_test);
 		free(line);
