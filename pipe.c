@@ -1,11 +1,11 @@
 #include "../headers/headers.h"
 
 /* links env with command*/
-char		*ft_env_cm(char **env, char *cm)
+char *ft_env_cm(char **env, char *cm)
 {
-	char	**list_path;
-	char	*tmp_path;
-	char	*cm_path;
+	char **list_path;
+	char *tmp_path;
+	char *cm_path;
 
 	while (*env)
 	{
@@ -28,9 +28,9 @@ char		*ft_env_cm(char **env, char *cm)
 }
 
 /* execute command by finding command and env link in ft_execute_env_cm */
-void		ft_execve(char *ag, char **env)
+void ft_execve(char *ag, char **env)
 {
-	char	**list_cm;
+	char **list_cm;
 
 	list_cm = ft_strsplit(ag, ' ');
 	if (execve(ft_env_cm(env, list_cm[0]), list_cm, env) == -1)
@@ -41,10 +41,10 @@ void		ft_execve(char *ag, char **env)
 }
 
 /* OPEN document and send output through pipe/parent_p */
-void		child_p(int *fd, char **ag, char **env)
+void child_p(int *fd, char **ag, char **env)
 {
-	int		filefd;
-	
+	int filefd;
+
 	filefd = open(ag[1], O_RDONLY, 0777);
 	if (filefd == -1)
 	{
@@ -58,10 +58,10 @@ void		child_p(int *fd, char **ag, char **env)
 }
 
 /* READS from pipe, ST_INPUT is ST_OUT of child_p */
-void		parent_p(int *fd, char **ag, char **env)
+void parent_p(int *fd, char **ag, char **env)
 {
-	int		filefd;
-	
+	int filefd;
+
 	// filefd = open("mytesting.txt", O_RDWR | O_CREAT | O_TRUNC,  0777);
 	filefd = open(ag[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (filefd == -1)
@@ -75,34 +75,27 @@ void		parent_p(int *fd, char **ag, char **env)
 	ft_execve(ag[3], env);
 }
 
-
 /* MAIN function, creates a pipe, forks/creates 2 running procceses same time,
 waits for the child to finish, pass output to paretnt, stores output in ag[4] */
-int			main(int ac, char **ag, char **env)
+int ft_pipe(char **ag, char **env)
 {
-	int	fd[2];
-	int	pid;
+	int fd[2];
+	int pid;
 
-	if (ac != 5)
-		printf("You have a wrong number of arguments (!5)");
+	pipe(fd);
+	pid = fork();
+	if (pid == 0)
+		child_p(fd, ag, env);
 	else
 	{
-		pipe(fd);
-		pid = fork();
-		if (pid == 0)
-			child_p(fd, ag, env);
-		else
-		{
-			waitpid(pid, NULL, 0);
-			parent_p(fd, ag, env);
-		}
-		close(fd[0]);
-		close(fd[1]);
+		waitpid(pid, NULL, 0);
+		parent_p(fd, ag, env);
 	}
+	close(fd[0]);
+	close(fd[1]);
+
 	return (0);
 }
-
-
 
 /* NOTES
 void _file_close(int fd[2])
