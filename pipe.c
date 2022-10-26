@@ -49,7 +49,7 @@ void child_p(int *fd, char **ag, char **env)
 	if (filefd == -1)
 	{
 		perror("child_p- make sure file exist");
-		exit(2);
+		exit(2); 
 	}
 	dup2(fd[1], 1);
 	dup2(filefd, 0);
@@ -77,6 +77,8 @@ void parent_p(int *fd, char **ag, char **env)
 
 /* MAIN function, creates a pipe, forks/creates 2 running procceses same time,
 waits for the child to finish, pass output to paretnt, stores output in ag[4] */
+
+//SIGNAL CHILD TO PARENT-> cat | ls = child_new_line, send signal to parent, close pipe |, will probably need KILL()
 int ft_pipe(char **ag, char **env)
 {
 	int fd[2];
