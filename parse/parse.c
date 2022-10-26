@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cruz <mda-cruz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:06 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/21 12:04:28 by mda-cruz         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:05:57 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 char	**ft_get_token(char *token, char **tokens, char *delimiters,
-	char *chars2jump)
+		char *chars2jump)
 {
-	int		position;
-	int		bufsize;
+	int	position;
+	int	bufsize;
 
 	bufsize = FT_TOK_BUFSIZE;
 	position = 0;
@@ -113,6 +113,9 @@ char	***ft_parse_cmds(char **pipes)
 		if (v.i > 0)
 			cmd = ft_realloc(cmd, (v.i + 2) * sizeof(char **));
 		cmd[v.i] = ft_split_line2(pipes[v.i], FT_TOK_DELIM);
+		v.tmp_str2 = ft_concat_multi(cmd[v.i], " ");
+		ft_matrix_free(cmd[v.i]);
+		cmd[v.i] = the_matrix(v.tmp_str2);
 		(v.i)++;
 		v.j = 0;
 	}
