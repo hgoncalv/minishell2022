@@ -16,15 +16,20 @@ void	ft_validate_redir_output(char *line, int i) //>
 	{
 		if ((line[i + 1] == '>'))
 		{
-			if ((line[i + 2] && (line[i + 2] == '<' || line[i + 2] == '>'
-						|| line[i + 2] == '|')))
+			if ((line[i + 2] && (line[i + 2] == '<' || line[i + 2] == '>')))
+			{
 				g_envp.valid_input = false;
+			}
 		}
 		else if (line[i + 1] == '<')
 			g_envp.valid_input = false;
 	}
 	else
+	{
+		//we have a problem because now ls>>|text.t is giving error because ls>>\0text.t is being called.
 		g_envp.valid_input = false;
+	}
+	
 }
 
 void	ft_validate_redir_input(char *line, int i) //<
