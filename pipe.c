@@ -1,4 +1,137 @@
-#include "../headers/headers.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <limits.h>
+# include <stdbool.h>
+# include <fcntl.h>
+
+int		ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+
+int	count_words(char *str, char c)
+{
+	int		i;
+
+	i = 0;
+	while (*str)
+	{
+		while (*str == c && *str)
+			str++;
+		if (*str == 0)
+			return (i);
+		while (*str && *str != c )
+			str++;
+		if (*str == 0)
+			return (i + 1);
+		i++;
+	}
+	return (i);
+}
+
+char		*ft_strdup(char *str)
+{
+	char	*dest;
+	int		i;
+
+	dest = malloc(ft_strlen(str) * sizeof(char) + 1);
+	if (dest == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+
+char	*ft_substr(char *str, int begg, int l)
+{
+	char	*sub;
+	int		i;
+	int		strl;
+
+	if (!str)
+		return (0);
+	strl = ft_strlen(str);
+	if (begg >= strl)
+	{
+		sub = malloc(sizeof(char));
+		if (!sub)
+			return (0);
+		*sub = '\0';
+		return (sub);
+	}
+	if (strl < l)
+		return (ft_strdup((char *)str + begg));
+	i = 0;
+	sub = (char *)malloc(l + 1 * sizeof(char));
+	if (!sub)
+		return (0);
+	while (begg < strl && i < l)
+		sub[i++] = str[begg++];
+	sub[i] = '\0';
+	return (sub);
+}
+
+char		**ft_strsplit(char const *str, char c)
+{
+	char	**split;
+	int		i;
+	int		i2;
+	int		cnt;
+
+	i = 0;
+	i2 = 0;
+	cnt = 0;
+	if (!(split = (char **)malloc(sizeof(char *) * (count_words((char *)str, c) +1))))
+		return (0);
+	while (cnt < count_words((char *)str, c) && count_words((char *)str, c) > 0)
+	{
+		while (str[i] == c && str[i])
+			i++;
+		i2 = i;
+		while (str[i] != c && str[i])
+			i++;
+		split[cnt++] = ft_substr((char *)str, i2, i -i2);
+	}
+	split[cnt] = 0;
+	return (split);
+}
+
+char	*ft_strnstr(const char	*str, const char *find, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (find[i] == '\0')
+		return ((char *)str);
+	while (str[i] && i < len)
+	{
+		j = 0;
+		while (str[i + j] == find[j] && i + j < len)
+		{
+			if (find[j + 1] == '\0')
+				return ((char *)str + i);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+
 
 /* links env with command*/
 char *ft_env_cm(char **env, char *cm)
