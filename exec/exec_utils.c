@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:22:06 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/25 23:59:07 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/27 01:02:55 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,31 @@ char	**ft_tokenized_str2_matrix(char **cmd)
 
 char	**ft_args_matrix(char **cmd, char **argv)
 {
-	char	*tmp_str;
+	char	**ret_argv;
 
+	ret_argv = argv;
 	if (cmd[0][0] == '<' && cmd[0][1] == '<')
 	{
-		tmp_str = ft_strdup(cmd[0]);
+		ret_argv = ft_matrix_dup(argv, 0);
+		free(ret_argv[0]);
+		ret_argv[0] = ft_strdup("ft_heredoc");
+		// ret_argv = malloc((6 + ft_matrix_get_num_col(argv))
+		//		* sizeof(char *));
+		// ret_argv[0] = ft_strdup("ft_heredoc");
+		// ret_argv[1] = ft_strdup(argv[1]);
+		// // ret_argv[2] = ft_strdup("cat");
+		// // ret_argv[3] = ft_strdup(">");
+		// i = 0;
+		// while (argv[i + 2])
+		// {
+		// 	ret_argv[i + 2] = ft_strdup(argv[i + 2]);
+		// 	i++;
+		// }
 		ft_matrix_free(argv);
-		argv = malloc(3 * sizeof(char *));
-		argv[0] = ft_strdup("ft_heredoc");
-		argv[1] = ft_strdup(tmp_str + 2);
-		argv[2] = NULL;
-		free(tmp_str);
+		// ret_argv[i + 2] = NULL;
+		print_arrays(ret_argv);
 	}
-	return (argv);
+	return (ret_argv);
 }
 
 char	**ft_tokenized_str2_matrix_remove_nps(char **cmd)

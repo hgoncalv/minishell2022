@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:20:19 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/26 19:13:36 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:28:56 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	status = ft_loop();
-	printf("exit");
+	printf("exit\n");
 	if (g_envp.exit_str == NULL)
 	{
 		ft_matrix_free(g_envp.envp);

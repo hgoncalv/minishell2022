@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:34 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/25 23:43:10 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/26 23:04:30 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_execute(char **cmd)
 	ret = -666;
 	if (cmd[0] == NULL)
 		return (1);
-	argv = ft_check_export_return_argv(cmd);
-	if (!argv)
-		argv = ft_tokenized_str2_matrix_remove_nps(cmd);
+	// argv = ft_check_export_return_argv(cmd);
+	// if (!argv)
+	argv = ft_tokenized_str2_matrix_remove_nps(cmd);
 	ret = ft_execute_if_builtin_run(argv, 0);
 	if (ret != 666)
 		return (ret);

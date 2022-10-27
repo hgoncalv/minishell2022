@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:21:06 by hgoncalv          #+#    #+#             */
-/*   Updated: 2022/10/26 19:19:49 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/27 01:05:01 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,10 @@ char	***ft_parse_cmds(char **pipes)
 		v.j = 0;
 	}
 	cmd[v.i] = NULL;
+	// for (size_t i = 0; cmd[i] != NULL; i++)
+	// {
+	// 	print_arrays(cmd[i]);
+	// 	ft_putchar_fd('\n', 1);
+	// }
 	return (cmd);
 }

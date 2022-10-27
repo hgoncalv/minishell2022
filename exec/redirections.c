@@ -6,7 +6,7 @@
 /*   By: hgoncalv <hgoncalv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 00:48:31 by mda-cruz          #+#    #+#             */
-/*   Updated: 2022/10/20 11:47:15 by hgoncalv         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:57:33 by hgoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_heredoc(char **argv)
 	char	*tmp_str;
 	char	*tmp_str2;
 
-	(void)argv;
+	//void)argv;
 	line = NULL;
 	tmp_str = NULL;
 	while (1)
@@ -33,9 +33,11 @@ int	ft_heredoc(char **argv)
 			free(tmp_str2);
 		}
 		free(tmp_str);
+		print_arrays(argv);
 		if (line[ft_strlen(line) - 1] == argv[1][0])
 			break ;
 	}
+	printf("%s", line);
 	free(line);
 	return (0);
 }
